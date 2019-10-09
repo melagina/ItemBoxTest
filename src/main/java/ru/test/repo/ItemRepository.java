@@ -5,10 +5,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import ru.test.model.Box;
-import ru.test.model.Item;
+import ru.test.model.BoxEntity;
+import ru.test.model.ItemEntity;
 
 @Repository
-public interface ItemRepository extends JpaRepository<Item, Integer> {
-	public List<Item> findAllByParentBoxAndColor(Box parentBox, String color);
+public interface ItemRepository extends JpaRepository<ItemEntity, Integer> {
+	public List<ItemEntity> findAllByParentBoxAndColor(BoxEntity parentBox, String color);
 }

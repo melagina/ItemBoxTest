@@ -1,5 +1,10 @@
 package ru.test;
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.bind.JAXBException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,17 +12,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import ru.test.service.ItemBoxesService;
-import ru.test.util.ItemBoxTestUtils;
 
-import javax.xml.bind.JAXBException;
-import java.io.IOException;
+import ru.test.logic.StartAppLogic;
+import ru.test.util.Converter;
 
 @SpringBootApplication
 public class ItemBoxesTest implements CommandLineRunner {
 
     @Autowired
-    private ItemBoxesService ibService;
+    private StartAppLogic logic;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemBoxesTest.class);
 
@@ -30,7 +33,7 @@ public class ItemBoxesTest implements CommandLineRunner {
 
     public void run(String... args) {
         try {
-            ibService.readAndSave(checkArgsAndGetFileName(args));
+        	logic.readAndSave(checkArgsAndGetFileName(args));
         } catch (JAXBException e) {
             LOGGER.error("error parsing xml, try another file\nstop app: ", e);
             finish();
@@ -48,15 +51,20 @@ public class ItemBoxesTest implements CommandLineRunner {
             LOGGER.error("error reading file: provide file path!");
             finish();
         }
-        if (!ItemBoxTestUtils.checkFilePath(args[0])) {
+        if (!checkFilePath(args[0])) {
             LOGGER.error("error reading file: provide correct file path!");
             finish();
         }
         return args[0];
     }
 
-    private void finish() {
-        ctx.close();
-    }
+    
+    private boolean checkFilePath(String fileName) {
+		File f = new File(fileName);
+		return f.exists() && !f.isDirectory();
+	}
 
+    private void finish() {
+    	ctx.close();
+    }
 }

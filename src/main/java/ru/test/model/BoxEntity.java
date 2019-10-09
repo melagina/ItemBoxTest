@@ -11,28 +11,28 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
+
+import ru.test.object.Box;
 
 @Entity
 @Table(name = "box")
-public class Box {
+public class BoxEntity implements Box {
 	
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
 	private Integer id;
 	
-	@ManyToOne(targetEntity = Box.class, cascade=CascadeType.PERSIST)
+	@ManyToOne(targetEntity = BoxEntity.class, cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "parent_box_id", nullable=true)
-	private Box parentBox;
+	private BoxEntity parentBox;
 	
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "parentBox", cascade = CascadeType.ALL)
-	private List<Item> item;
+	private List<ItemEntity> item;
 	
 	@OneToMany(fetch = FetchType.EAGER,mappedBy = "parentBox", cascade = CascadeType.ALL)
-	private List<Box> box;
+	private List<BoxEntity> box;
 	
-	public Box() {
+	public BoxEntity() {
 		super();
 	}
 
@@ -40,40 +40,33 @@ public class Box {
 		return id;
 	}
 	
-	@XmlAttribute
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public List<Item> getItem() {
+	public List<ItemEntity> getItem() {
 		return item;
 	}
 
-	@XmlElement(name = "Item", nillable = true)
-	public void setItem(List<Item> item) {
+	public void setItem(List<ItemEntity> item) {
 		this.item = item;
 	}
 	
 
-	public List<Box> getBox() {
+	public List<BoxEntity> getBox() {
 		return box;
 	}
-	@XmlElement(name = "Box", nillable = true)
-	public void setBox(List<Box> box) {
+	public void setBox(List<BoxEntity> box) {
 		this.box = box;
 	}
 
-	public Box getParentBox() {
+	public BoxEntity getParentBox() {
 		return parentBox;
 	}
 
-	public void setParentBox(Box parentBox) {
+	public void setParentBox(BoxEntity parentBox) {
 		this.parentBox = parentBox;
 	}
 
-	@Override
-	public String toString() {
-		return "Box [id=" + id + ", parentBoxId="  +  "]";
-	}
 	
 }

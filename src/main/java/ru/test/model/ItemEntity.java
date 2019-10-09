@@ -1,5 +1,7 @@
 package ru.test.model;
 
+import java.lang.annotation.Annotation;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,13 +9,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAttribute;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import ru.test.object.Item;
+
 @Entity
 @Table(name = "item")
-public class Item {
+public class ItemEntity implements Item {
 	
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
@@ -23,11 +26,11 @@ public class Item {
 	private  String color;
 	
 	@JsonProperty("box")
-	@ManyToOne(targetEntity = Box.class, cascade=CascadeType.PERSIST)
+	@ManyToOne(targetEntity = BoxEntity.class, cascade=CascadeType.PERSIST)
 	@JoinColumn(name = "parent_box_id", nullable=true)
-	private Box parentBox;
+	private BoxEntity parentBox;
 	
-	public Item() { super(); }
+	public ItemEntity() { super(); }
 
 	public String getColor() {
 		return color;
@@ -37,27 +40,31 @@ public class Item {
 		return id;
 	}
 	
-	@XmlAttribute
 	public void setColor(String color) {
 		this.color = color;
 	}
 	
-	@XmlAttribute
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public Box getParentBox() {
+	public BoxEntity getParentBox() {
 		return parentBox;
 	}
 
-	public void setParentBox(Box parentBox) {
+	public void setParentBox(BoxEntity parentBox) {
 		this.parentBox = parentBox;
 	}
 
-	@Override
-	public String toString() {
-		return "Item [id=" + id + ", color=" + color + ", parentBox="  + "]";
+	public Class<? extends Annotation> annotationType() {
+		// TODO Auto-generated method stub
+		return null;
 	}
+
+	public String name() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
