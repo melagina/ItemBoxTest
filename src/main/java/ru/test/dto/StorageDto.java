@@ -1,41 +1,41 @@
 package ru.test.dto;
 
-import java.util.List;
+import ru.test.object.Storage;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import ru.test.object.Storage;
+import java.util.List;
 
 @XmlRootElement(name = "Storage")
 public class StorageDto implements Storage {
-	
-	private List<BoxDto> box;
-	private List<ItemDto> item;
 
-	public List<BoxDto> getBox() {
-		return box;
-	}
-	public List<ItemDto> getItem() {
-		return item;
-	}
+    private List<BoxDto> box;
+    private List<ItemDto> item;
 
-	@XmlElement(name =  "Box", nillable = true)
-	public void setBox(List<BoxDto> box) {
-		this.box = box;
-	}
+    public List<BoxDto> getBox() {
+        return box;
+    }
 
-	@XmlElement(name =  "Item", nillable = true)
-	public void setItem(List<ItemDto> item) {
-		this.item = item;
-	}
+    public List<ItemDto> getItem() {
+        return item;
+    }
 
-	@Override
-	public String toString() {
-		return "Storage [Box=" + box + "]";
-	}
-	
-	
+    @XmlElement(name = "Box", nillable = true)
+    public void setBox(List<BoxDto> box) {
+        this.box = box;
+    }
+
+    @XmlElement(name = "Item", nillable = true)
+    public void setItem(List<ItemDto> item) {
+        this.item = item;
+    }
+
+    @Override
+    public String toString() {
+        return "Storage [Box=" + box + "]";
+    }
+
+
 //	@XmlElement(name =  "Box")
 //	private List<Box> box;
 //	public List<Item> item;
@@ -56,6 +56,5 @@ public class StorageDto implements Storage {
 //	public String toString() {
 //		return "Storage [box=" + box + ", item=" + item + "]";
 //	}
-	
-	
+
 }

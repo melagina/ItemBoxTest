@@ -1,10 +1,5 @@
 package ru.test;
 
-import java.io.File;
-import java.io.IOException;
-
-import javax.xml.bind.JAXBException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +7,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
 import ru.test.logic.StartAppLogic;
-import ru.test.util.Converter;
+
+import javax.xml.bind.JAXBException;
+import java.io.File;
 
 @SpringBootApplication
 public class ItemBoxesTest implements CommandLineRunner {
@@ -33,12 +29,12 @@ public class ItemBoxesTest implements CommandLineRunner {
 
     public void run(String... args) {
         try {
-        	logic.readAndSave(checkArgsAndGetFileName(args));
+            logic.readAndSave(checkArgsAndGetFileName(args));
         } catch (JAXBException e) {
             LOGGER.error("error parsing xml, try another file\nstop app: ", e);
             finish();
-        } catch (IOException e) {
-            LOGGER.error("error saving xml data to file: ", e);
+//        } catch (IOException e) {
+//            LOGGER.error("error saving xml data to file: ", e);
         } catch (Throwable t) {
             LOGGER.error("error during execution: ", t);
         } finally {
@@ -58,13 +54,14 @@ public class ItemBoxesTest implements CommandLineRunner {
         return args[0];
     }
 
-    
+
     private boolean checkFilePath(String fileName) {
-		File f = new File(fileName);
-		return f.exists() && !f.isDirectory();
-	}
+        File f = new File(fileName);
+        return f.exists() && !f.isDirectory();
+    }
 
     private void finish() {
-    	ctx.close();
+        ctx.close();
     }
+
 }
