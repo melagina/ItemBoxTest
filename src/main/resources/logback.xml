@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-	<property name="loggingPattern"
-		value="%date{ISO8601} %-5level %t %logger{0} : %M : %L - %msg%n" />
-	<property name="loggingHome" value="/logs/item-boxes-test" />
+    <property name="loggingPattern"
+              value="%date{ISO8601} %-5level %t %logger{0} : %M : %L - %msg%n"/>
+    <property name="loggingHome" value="/logs/item-boxes-test"/>
 
-	<appender name="WSLOGFILE"
-		class="ch.qos.logback.core.rolling.RollingFileAppender">
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<fileNamePattern>${loggingHome}/item-boxes-test.%d{yyyy-MM-dd}.log
-			</fileNamePattern>
-			<maxHistory>30</maxHistory>
-			<totalSizeCap>2GB</totalSizeCap>
-			<cleanHistoryOnStart>true</cleanHistoryOnStart>
-		</rollingPolicy>
-		<encoder>
-			<pattern>${loggingPattern}</pattern>
-		</encoder>
-	</appender>
+    <appender name="WSLOGFILE"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${loggingHome}/item-boxes-test.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>2GB</totalSizeCap>
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${loggingPattern}</pattern>
+        </encoder>
+    </appender>
 
-	<logger name="org.springframework" level="ERROR" />
-	<logger name="org.hibernate.SQL" level="DEBUG" />
+    <logger name="org.springframework" level="ERROR"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
 
-	<root level="INFO">
-		<appender-ref ref="WSLOGFILE" />
-	</root>
+    <root level="INFO">
+        <appender-ref ref="WSLOGFILE"/>
+    </root>
 
 </configuration>

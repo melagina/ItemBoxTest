@@ -14,7 +14,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import ru.test.logic.StartAppLogic;
-import ru.test.util.Converter;
 
 @SpringBootApplication
 public class ItemBoxesTest implements CommandLineRunner {
@@ -58,7 +57,7 @@ public class ItemBoxesTest implements CommandLineRunner {
         return args[0];
     }
 
-    
+
     private boolean checkFilePath(String fileName) {
 		File f = new File(fileName);
 		return f.exists() && !f.isDirectory();
